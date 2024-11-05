@@ -1053,8 +1053,8 @@ public class Radar implements IRadar {
                         headBits = new ModelPart[] { ocelotModel.head };
                     } else if (model instanceof PhantomModel phantomEntityModel) {
                         headBits = new ModelPart[] { phantomEntityModel.root().getChild("body") };
-                    } else if (model instanceof RabbitModel rabbitModel) {
-                        headBits = new ModelPart[] { rabbitModel.head, rabbitModel.rightEar, rabbitModel.leftEar, rabbitModel.nose };
+                    /*} else if (model instanceof RabbitModel rabbitModel) {
+                        headBits = new ModelPart[] { rabbitModel.head, rabbitModel.rightEar, rabbitModel.leftEar, rabbitModel.nose };*/
                     } else if (model instanceof RavagerModel ravagerEntityModel) {
                         headBits = new ModelPart[] { ravagerEntityModel.root().getChild("neck").getChild("head") };
                     } else if (model instanceof ShulkerModel shulkerEntityModel) {

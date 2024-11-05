@@ -178,7 +178,7 @@ public class ColorManager {
         BlockRepository.getBlocks();
         this.loadColorPicker();
         this.loadTexturePackTerrainImage();
-        TextureAtlasSprite missing = VoxelConstants.getMinecraft().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(ResourceLocation.parse("missingno"));
+        TextureAtlasSprite missing = VoxelConstants.getMinecraft().getTextureAtlas(ResourceLocation.withDefaultNamespace("textures/atlas/blocks.png")).apply(ResourceLocation.parse("missingno"));
         this.failedToLoadX = missing.getU0();
         this.failedToLoadY = missing.getV0();
         this.loaded = false;
@@ -264,8 +264,8 @@ public class ColorManager {
         matrixStack.pushMatrix();
         matrixStack.translate((width / 2f) - size / 2.0F + transX, (height / 2f) - size / 2.0F + transY, 0.0F + transZ);
         matrixStack.scale(size, size, size);
-        VoxelConstants.getMinecraft().getTextureManager().getTexture(InventoryMenu.BLOCK_ATLAS).setFilter(false, false);
-        OpenGL.Utils.img2(InventoryMenu.BLOCK_ATLAS);
+        VoxelConstants.getMinecraft().getTextureManager().getTexture(ResourceLocation.withDefaultNamespace("textures/atlas/blocks.png")).setFilter(false, false);
+        OpenGL.Utils.img2(ResourceLocation.withDefaultNamespace("textures/atlas/blocks.png"));
         matrixStack.rotate(Axis.YP.rotationDegrees(180.0F));
         matrixStack.rotate(Axis.YP.rotationDegrees(rotY));
         matrixStack.rotate(Axis.XP.rotationDegrees(rotX));
@@ -315,7 +315,7 @@ public class ColorManager {
 
     private void loadTexturePackTerrainImage() {
         try {
-            VoxelConstants.getMinecraft().getTextureManager().getTexture(InventoryMenu.BLOCK_ATLAS).bind();
+            VoxelConstants.getMinecraft().getTextureManager().getTexture(ResourceLocation.withDefaultNamespace("textures/atlas/blocks.png")).bind();
             BufferedImage terrainStitched = ImageUtils.createBufferedImageFromCurrentGLImage();
             this.terrainBuff = new BufferedImage(terrainStitched.getWidth(null), terrainStitched.getHeight(null), 6);
             Graphics gfx = this.terrainBuff.createGraphics();
@@ -480,14 +480,14 @@ public class ColorManager {
             Block material = blockState.getBlock();
             if (block instanceof LiquidBlock) {
                 if (material == Blocks.WATER) {
-                    icon = VoxelConstants.getMinecraft().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(ResourceLocation.parse("minecraft:blocks/water_flow"));
+                    icon = VoxelConstants.getMinecraft().getTextureAtlas(ResourceLocation.withDefaultNamespace("textures/atlas/blocks.png")).apply(ResourceLocation.parse("minecraft:blocks/water_flow"));
                 } else if (material == Blocks.LAVA) {
-                    icon = VoxelConstants.getMinecraft().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(ResourceLocation.parse("minecraft:blocks/lava_flow"));
+                    icon = VoxelConstants.getMinecraft().getTextureAtlas(ResourceLocation.withDefaultNamespace("textures/atlas/blocks.png")).apply(ResourceLocation.parse("minecraft:blocks/lava_flow"));
                 }
             } else if (material == Blocks.WATER) {
-                icon = VoxelConstants.getMinecraft().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(ResourceLocation.parse("minecraft:blocks/water_still"));
+                icon = VoxelConstants.getMinecraft().getTextureAtlas(ResourceLocation.withDefaultNamespace("textures/atlas/blocks.png")).apply(ResourceLocation.parse("minecraft:blocks/water_still"));
             } else if (material == Blocks.LAVA) {
-                icon = VoxelConstants.getMinecraft().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(ResourceLocation.parse("minecraft:blocks/lava_still"));
+                icon = VoxelConstants.getMinecraft().getTextureAtlas(ResourceLocation.withDefaultNamespace("textures/atlas/blocks.png")).apply(ResourceLocation.parse("minecraft:blocks/lava_still"));
             }
         }
 
@@ -854,7 +854,7 @@ public class ColorManager {
                     }
 
                     ResourceLocation matchID = ResourceLocation.parse(matchTiles);
-                    TextureAtlasSprite compareIcon = VoxelConstants.getMinecraft().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(matchID);
+                    TextureAtlasSprite compareIcon = VoxelConstants.getMinecraft().getTextureAtlas(ResourceLocation.withDefaultNamespace("textures/atlas/blocks.png")).apply(matchID);
                     if (compareIcon.atlasLocation() != MissingTextureAtlasSprite.getLocation()) {
                         ArrayList<BlockState> tmpList = new ArrayList<>();
 

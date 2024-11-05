@@ -9,6 +9,7 @@ import com.mojang.blaze3d.resource.GraphicsResourceAllocator;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.model.RabbitModel;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.LightTexture;
@@ -29,7 +30,7 @@ public abstract class MixinWorldRenderer {
     @Shadow @Nullable public abstract RenderTarget getTranslucentTarget();
 
     @Inject(method = "renderLevel", at = @At("RETURN"))
-    private void postRender(GraphicsResourceAllocator graphicsResourceAllocator, DeltaTracker deltaTracker, boolean bl, Camera camera, GameRenderer gameRenderer, LightTexture lightTexture, Matrix4f matrix4f, Matrix4f matrix4f2, CallbackInfo ci) {
+    private void postRender(GraphicsResourceAllocator graphicsResourceAllocator, DeltaTracker deltaTracker, boolean bl, Camera camera, GameRenderer gameRenderer, Matrix4f matrix4f, Matrix4f matrix4f2, CallbackInfo ci) {
         if (VoxelMap.mapOptions.waypointsAllowed && (VoxelConstants.getVoxelMapInstance().getMapOptions().showBeacons || VoxelConstants.getVoxelMapInstance().getMapOptions().showWaypoints)) {
             if (VoxelConstants.isFabulousGraphicsOrBetter()) {
                 RenderTarget framebuffer = VoxelConstants.getMinecraft().getMainRenderTarget();
@@ -37,7 +38,6 @@ public abstract class MixinWorldRenderer {
                 GlStateManager._glBindFramebuffer(OpenGL.GL30_GL_DRAW_FRAMEBUFFER, framebuffer.frameBufferId);
                 GlStateManager._glBlitFrameBuffer(0, 0, this.getTranslucentTarget().width, this.getTranslucentTarget().height, 0, 0, framebuffer.width, framebuffer.height, 256, OpenGL.GL11_GL_NEAREST);
             }
-
             boolean drawSignForeground = !VoxelConstants.isFabulousGraphicsOrBetter();
             Matrix4fStack matrixStack = RenderSystem.getModelViewStack();
             try {
